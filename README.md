@@ -5,7 +5,8 @@
 - [send_text_serial.py](./send_text_serial.py)
 - [send_text_serial_with_tcp_fallback.py](./send_text_serial_with_tcp_fallback.py)
 
-> [!TIP] To set environment variable in PowerShell use `$env:TCP_HOSTNAME="1.2.3.4"`. For linux-ish use `export TCP_HOSTNAME="1.2.3.4"`.
+> [!TIP] 
+> To set environment variable in PowerShell use `$env:TCP_HOSTNAME="1.2.3.4"`. For linux-ish use `export TCP_HOSTNAME="1.2.3.4"`.
 
 ### Work in progress
 

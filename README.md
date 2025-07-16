@@ -14,6 +14,8 @@
 > [!WARNING]
 > These scripts maybe non-functional
 
+- [wip_waiting_for_ack.py](./wip_waiting_for_ack.py) - getting an ack from messages using the sendtext method
+
 ## Further Reading
 
 ### Official Docs

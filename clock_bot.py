@@ -14,6 +14,7 @@ def setup():
 def main():
     setup()
     try:
+        print("Clock bot started. Sending node info and 'Bong!' every hour...")
         while True:
             current_time = time.localtime()
             if current_time.tm_min == 0 and current_time.tm_sec == 0:

@@ -48,7 +48,7 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
             # Not worth the effort to reproduce the senddata request and callback https://python.meshtastic.org/mesh_interface.html#meshtastic.mesh_interface.MeshInterface.onResponseTraceRoute
             try:
                 interface.sendTraceRoute(dest=from_node, hopLimit=5)
-            except meshtastic.MeshInterfaceError as e:
+            except interface.MeshInterfaceError as e:
                 logging.error(f"Failed to send traceroute: {e}")
     else:
         logging.debug(f"Received packet of type {packet_type}")

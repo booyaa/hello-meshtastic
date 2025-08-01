@@ -8,6 +8,7 @@
 - [Send text over Serial](./send_text_serial.py)
 - [Send text over Serial with TCP fallback](./send_text_serial_with_tcp_fallback.py) - fairly robust way of trying serial and using tcp fallback. It will also handle when the serial isn't a meshtastic node.
 - [Trace Route Bot](./traceroute_bot.py) - sends trace routes if DM
+    - `$env:PYTHONIOENCODING="utf-8"; $env:PYTHONUTF8=1; python .\traceroute_bot.py`
 
 > [!TIP]
 > To set environment variable in PowerShell use `$env:TCP_HOSTNAME="1.2.3.4"`. For linux-ish use `export TCP_HOSTNAME="1.2.3.4"`.

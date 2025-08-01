@@ -42,7 +42,7 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         logging.info(f"Sender details: {from_long_name} ({from_short_name}) ID: {from_id} Hardware: {from_hw}")
         if to == 'broadcast':
             channel = packet.get('channel', 'DEFAULT')
-            if not message.startswith("traceroute"):
+            if not message.decode().lower().startswith('traceroute'):
                 logging.info(f"Received: {message} from {from_node} on channel {channel}")
                 return
             

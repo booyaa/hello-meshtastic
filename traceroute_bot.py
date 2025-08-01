@@ -42,7 +42,15 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         logging.info(f"Sender details: {from_long_name} ({from_short_name}) ID: {from_id} Hardware: {from_hw}")
         if to == 'broadcast':
             channel = packet.get('channel', 'DEFAULT')
-            logging.info(f"Received: {message} from {from_node} on channel {channel}")
+            if not message.startswith("traceroute"):
+                logging.info(f"Received: {message} from {from_node} on channel {channel}")
+                return
+            
+            logging.info(f"Received traceroute ({message}) request from {from_node} on channel {channel}, sending trace route")
+            try:
+                interface.sendTraceRoute(dest=from_node, hopLimit=5)
+            except interface.MeshInterfaceError as e:
+                logging.error(f"Failed to send traceroute: {e}")
         else:
             logging.info(f"Received: {message} (DM) from {from_node} to {'me' if to == my_node_info['num'] else to}, sending trace route")
             # Not worth the effort to reproduce the senddata request and callback https://python.meshtastic.org/mesh_interface.html#meshtastic.mesh_interface.MeshInterface.onResponseTraceRoute

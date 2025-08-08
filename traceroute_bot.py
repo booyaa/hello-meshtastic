@@ -67,9 +67,9 @@ def lazy_traceroute(from_node):
         f = io.StringIO()
         with contextlib.redirect_stdout(f):
             interface.sendTraceRoute(dest=from_node, hopLimit=5)
-        output = f.getvalue()
-        logging.info(f"Traceroute output:\n{output}")
-        interface.sendText(text=f"TR {output}", destinationId=from_node)
+        output = f.getvalue().replace('\n', ' ')
+        logging.info(output)
+        interface.sendText(text=output, destinationId=from_node)
     except interface.MeshInterfaceError as e:
         logging.error(f"Failed to send traceroute: {e}")
 

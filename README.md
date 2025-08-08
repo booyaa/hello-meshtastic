@@ -20,6 +20,18 @@
 
 - [Waiting for ACK](./wip_waiting_for_ack.py) - getting an ack from messages using the sendtext method
 
+### mqtt
+
+reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
+
+- code: [mqtt-client.py](https://github.com/pdxlocations/Meshtastic-Python-Examples/blob/main/MQTT/mqtt-client.py) - not working
+- topic: `msh/EU_868/UK/England/Norfolk`
+- channel
+    - default: key `AQ==`
+    - uplink: on
+    - downlink: off
+    - location: don't share
+
 ## Further Reading
 
 ### Official Docs

@@ -1,3 +1,4 @@
+import contextlib
 import os
 from time import sleep
 import meshtastic
@@ -5,6 +6,10 @@ import meshtastic.tcp_interface
 from pubsub import pub
 import logging
 from logging import handlers
+import contextlib
+import io
+
+interface = None
 
 logging.basicConfig(
     # Usage: TRACEROUTE_BOT_LOG_LEVEL=debug python traceroute_bot.py
@@ -49,6 +54,12 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
             logging.info(f"Received traceroute ({message}) request from {from_node} on channel {channel}, sending trace route")
             try:
                 interface.sendTraceRoute(dest=from_node, hopLimit=5)
+                f = io.StringIO()
+                with contextlib.redirect_stdout(f):
+                    interface.sendTraceRoute(dest=from_node, hopLimit=5)
+                    output = f.getvalue()
+                    logging.info(f"Traceroute output:\n{output}")
+                    interface.sendText(f"TR {output.join('\n')}", dest=from_node)
             except interface.MeshInterfaceError as e:
                 logging.error(f"Failed to send traceroute: {e}")
         else:

@@ -1,5 +1,6 @@
 import contextlib
 import os
+import pprint
 from time import sleep
 import meshtastic
 import meshtastic.tcp_interface
@@ -31,6 +32,10 @@ def on_connection(interface, topic=pub.AUTO_TOPIC):
     long_name = my_node_info.get('user', {}).get('longName', 'Unknown')
     id = my_node_info.get('user', {}).get('id', 'Unknown')
     logging.info(f"Connected to {long_name} (ID: {id}), Battery Level: {battery_level}%")
+    # no channel details
+    # pprint.pprint(interface.showInfo())
+    # full channel details, but how do you parse it?
+    # pprint.pprint(interface.getNode(id).showInfo())
 
 def on_receive(packet, topic=pub.AUTO_TOPIC):
     packet_type = packet.get('decoded', {}).get('portnum')
@@ -39,16 +44,12 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         message = packet.get('decoded', {}).get('payload', '')
         from_node = packet.get('from', 'Unknown')
         to = packet.get('to', 'Unknown') if packet.get('to') != meshtastic.BROADCAST_NUM else 'broadcast'
-        from_node_details = interface.nodesByNum[from_node]
-        from_long_name = from_node_details.get('user', {}).get('longName', 'Unknown')
-        from_short_name = from_node_details.get('user', {}).get('shortName', 'Unknown')
-        from_id = from_node_details.get('user', {}).get('id', 'Unknown')
-        from_hw = from_node_details.get('user', {}).get('hwModel', 'Unknown')
-        logging.info(f"Sender details: {from_long_name} ({from_short_name}) ID: {from_id} Hardware: {from_hw}")
+        from_node_details = get_node_info(from_node)
+        logging.info(f"Sender details: {from_node_details["string"]}")
         if to == 'broadcast':
             channel = packet.get('channel', 'DEFAULT')
             if not message.decode().lower().startswith('traceroute'):
-                logging.info(f"Received: {message} from {from_node} on channel {channel}")
+                logging.debug(f"Received: {message} from {from_node} on channel {channel}")
                 return
             logging.info(f"Received traceroute ({message}) request from {from_node} on channel {channel}, sending trace route")
             lazy_traceroute(from_node)
@@ -61,6 +62,21 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
 # events
 pub.subscribe(on_connection, "meshtastic.connection.established")
 pub.subscribe(on_receive, "meshtastic.receive")
+
+# helpers
+def get_node_info(node_num):
+    global interface
+
+    """Retrieve node information by node number."""
+    node_info = interface.nodesByNum.get(node_num, {})
+    user_info = node_info.get('user', {})
+    return {
+        'longName': user_info.get('longName', 'Unknown'),
+        'shortName': user_info.get('shortName', 'Unknown'),
+        'id': user_info.get('id', 'Unknown'),
+        'hwModel': user_info.get('hwModel', 'Unknown'),
+        'string': f"{user_info.get('longName', 'Unknown')} ({user_info.get('shortName', 'Unknown')}) ID: {user_info.get('id', 'Unknown')} Hardware: {user_info.get('hwModel', 'Unknown')}"
+    }
 
 def lazy_traceroute(from_node):
     try:

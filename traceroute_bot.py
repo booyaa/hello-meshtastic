@@ -50,31 +50,28 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
             if not message.decode().lower().startswith('traceroute'):
                 logging.info(f"Received: {message} from {from_node} on channel {channel}")
                 return
-            
             logging.info(f"Received traceroute ({message}) request from {from_node} on channel {channel}, sending trace route")
-            try:
-                interface.sendTraceRoute(dest=from_node, hopLimit=5)
-                f = io.StringIO()
-                with contextlib.redirect_stdout(f):
-                    interface.sendTraceRoute(dest=from_node, hopLimit=5)
-                    output = f.getvalue()
-                    logging.info(f"Traceroute output:\n{output}")
-                    interface.sendText(f"TR {output.join('\n')}", dest=from_node)
-            except interface.MeshInterfaceError as e:
-                logging.error(f"Failed to send traceroute: {e}")
+            lazy_traceroute(from_node)
         else:
             logging.info(f"Received: {message} (DM) from {from_node} to {'me' if to == my_node_info['num'] else to}, sending trace route")
-            # Not worth the effort to reproduce the senddata request and callback https://python.meshtastic.org/mesh_interface.html#meshtastic.mesh_interface.MeshInterface.onResponseTraceRoute
-            try:
-                interface.sendTraceRoute(dest=from_node, hopLimit=5)
-            except interface.MeshInterfaceError as e:
-                logging.error(f"Failed to send traceroute: {e}")
+            lazy_traceroute(from_node)
     else:
         logging.debug(f"Received packet of type {packet_type}")
 
 # events
 pub.subscribe(on_connection, "meshtastic.connection.established")
 pub.subscribe(on_receive, "meshtastic.receive")
+
+def lazy_traceroute(from_node):
+    try:
+        f = io.StringIO()
+        with contextlib.redirect_stdout(f):
+            interface.sendTraceRoute(dest=from_node, hopLimit=5)
+        output = f.getvalue()
+        logging.info(f"Traceroute output:\n{output}")
+        interface.sendText(text=f"TR {output}", destinationId=from_node)
+    except interface.MeshInterfaceError as e:
+        logging.error(f"Failed to send traceroute: {e}")
 
 def main():
     tcp_hostname = os.getenv('MESHTASTIC_HOST', 'meshtastic.local')

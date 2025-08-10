@@ -1,5 +1,5 @@
 # Custom
-*.log
+*.log*
 # don't commit me bro - scratch / test scripts
 dcmb_*
 

@@ -85,7 +85,7 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         current_time = time.localtime()
         elapsed_seconds = (current_time.tm_min * 60 + current_time.tm_sec) - (last_run.tm_min * 60 + last_run.tm_sec)
         logging.info(f"Elapsed seconds since last traceroute: {elapsed_seconds}")
-        if elapsed_seconds <= 30: # ios
+        if elapsed_seconds <= 30 and elapsed_seconds > 0: # ios
             logging.warning(f"Skipping traceroute due to rate limiting, elapsed seconds: {elapsed_seconds}")
             traceroute = "skipped"
         else:

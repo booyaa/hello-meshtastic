@@ -1,5 +1,6 @@
 import time
 from mudp import send_nodeinfo, send_text_message, conn, node
+import requests
 
 def setup():
     node.channel = "LongFast"
@@ -19,8 +20,13 @@ def main():
             current_time = time.localtime()
             if current_time.tm_min == 0 and current_time.tm_sec == 0:
                 send_nodeinfo()
-                send_text_message("Bong!")
-                print("Bong")
+                message = "Bong!"
+                response = requests.get("http://wttr.in/Attleborough?format=4")
+                if response.status_code == 200:
+                    weather_info = response.text
+                    message += f" {weather_info}"
+                send_text_message(message)
+                print(message)
                 time.sleep(1)  # Prevent multiple prints within the same second
             time.sleep(0.5)  # Check time every half second
     except KeyboardInterrupt:

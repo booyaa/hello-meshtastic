@@ -21,10 +21,13 @@ def main():
             if current_time.tm_min == 0 and current_time.tm_sec == 0:
                 send_nodeinfo()
                 message = "Bong!"
-                response = requests.get("http://wttr.in/Attleborough?format=4")
-                if response.status_code == 200:
-                    weather_info = response.text
-                    message += f" {weather_info}"
+                try:
+                    response = requests.get("http://wttr.in/Attleborough?format=4")
+                    if response.status_code == 200:
+                        weather_info = response.text
+                        message += f" {weather_info}"
+                except requests.RequestException as e:
+                    print(f"Error fetching weather info: {e}")
                 send_text_message(message)
                 print(message)
                 time.sleep(1)  # Prevent multiple prints within the same second

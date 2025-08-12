@@ -21,7 +21,17 @@
 
 - [Waiting for ACK](./wip_waiting_for_ack.py) - getting an ack from messages using the sendtext method
 
-### Train times
+### Side Quests
+
+#### ClockBot feature testing in REPL
+
+```sh
+python
+>>> import clock_bot
+>>> clock_bot.weather_forecast()
+```
+
+#### Train times
 
 See also #trains
 

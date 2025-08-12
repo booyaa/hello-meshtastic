@@ -31,6 +31,26 @@ python
 >>> clock_bot.weather_forecast()
 ```
 
+#### News
+
+[local news headline parser](./wip_local_news.py)
+
+```py
+>>> first_item = parse_news.rss.channel.items[0]
+>>> print(f"BONG! Local news: {first_item.title.content} {first_item.guid.content}")
+BONG! Local news: Dance venue 'won't become car park' as offers made https://www.bbc.com/news/articles/cj0y7jp5nrgo#0
+>>> print(len(f"BONG! Local news: {first_item.title.content} {first_item.guid.content}"))
+117
+
+>>> len([item.title.content for item in parse_news.rss.channel.items])
+22
+
+>>> " ".join([item.title.content for item in parse_news.rss.channel.items])
+"Dance venue 'won't become car park' as offers made Woman seriously injured in hit-and-run collision Swimmer, 23, who died had 'the biggest heart' Twins killed in holiday crash 'had special bond' 'Wonderful' ferry resumes crossings after repairs Hemp is star attraction at girls' football event Opening of £47m bypass hailed as 'historic day' Crews tackle forest fire close to A-road Motorcyclist in 50s dies following collision Library locks its doors when open due to anti-social incidents Social clubs warn locals to 'use it or lose it' Chinook crash victim 'would want answers', says sister Hemp grateful for 'special' Carrow Road moment Forson to miss Watford cup tie with hamstring injury Norwich squad still 'building relationships' - Wright Norwich have 'huge amount to do' - Manning The East Anglian rivalry from behind the mic Goreham celebrates 25 years of Canaries commentary ‘Transformational’ bypass now open What’s new at Norwich Castle? Farmwatch How will sale of Norwich Airport affect Norfolk?"
+>>> len(" ".join([item.title.content for item in parse_news.rss.channel.items]))
+1010
+```
+
 #### Train times
 
 See also #trains

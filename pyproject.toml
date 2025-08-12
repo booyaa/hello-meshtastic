@@ -8,4 +8,5 @@ dependencies = [
     "meshtastic>=2.6.4",
     "mudp>=1.0.0a4",
     "paho-mqtt>=2.1.0",
+    "rss-parser>=2.1.1",
 ]

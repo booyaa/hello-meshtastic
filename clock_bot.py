@@ -4,8 +4,8 @@ from mudp import send_nodeinfo, send_text_message, conn, node
 import requests
 
 # FIXME: create a config
-weather_chimes = [9,12,18] # what hours should we announce weather?
-dad_joke_chimes = [7, 8, 10, 11, 13] # what hours should we announce dad jokes?
+weather_chimes = [9, 12, 18] # what hours should we announce weather?
+dad_joke_chimes = [7, 8, 10, 11, 13, 14, 15, 16, 17] # what hours should we announce dad jokes?
 user_agent = "Clock Bot v0.0.0 (https://github.com/booyaa/hello-meshtastic)"
 
 def setup():

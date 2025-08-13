@@ -33,7 +33,9 @@ python
 
 #### News
 
-[local news headline parser](./wip_local_news.py)
+- [local news headline parser](./wip_local_news.py)
+- [rss-parser](https://dhvcc.github.io/rss-parser/)
+- [bbc local news rss](https://feeds.bbci.co.uk/news/england/norfolk/rss.xml)
 
 ```py
 >>> first_item = parse_news.rss.channel.items[0]
@@ -56,8 +58,8 @@ BONG! Local news: Dance venue 'won't become car park' as offers made https://www
 See also #trains
 
 ```sh
-curl -LO https://trntxt.uk/norwich/londonliverpoolstreet
-curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+curl -LO https://trntxt.uk/norwich/londonliverpoolstreet # reduced html no JS (I think)
+curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash # cargobinstall
 export PATH=$HOME/.cargo/bin
 cargo-binstall htmlq
 cat londonliverpoolstreet | htmlq 'div' --remove-nodes br
@@ -70,10 +72,10 @@ reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
 - code: [mqtt-client.py](https://github.com/pdxlocations/Meshtastic-Python-Examples/blob/main/MQTT/mqtt-client.py) - not working
 - topic: `msh/EU_868/UK/England/Norfolk`
 - channel
-    - default: key `AQ==`
-    - uplink: on
-    - downlink: off
-    - location: don't share
+  - default: key `AQ==`
+  - uplink: on
+  - downlink: off
+  - location: don't share
 
 ## Further Reading
 

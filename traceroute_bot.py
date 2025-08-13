@@ -123,6 +123,7 @@ def get_node_info(node_num):
     """Retrieve node information by node number."""
     node_info = interface.nodesByNum.get(node_num, {})
     user_info = node_info.get('user', {})
+    print(f"DEBUG|coords {node_info.get('position', {})}")
     coords = (node_info.get('position', {}).get('latitude', {}), node_info.get('position', {}).get('longitude', {}))
     return {
         'longName': user_info.get('longName', 'Unknown'),

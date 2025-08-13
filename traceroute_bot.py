@@ -72,6 +72,7 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         if message.decode().lower().startswith ('on program'):
             channel = packet.get('channel',0)
             interface.sendText("(puts hands on head)", channelIndex=channel)
+            logging.info(f"Received status check from {from_node_details['string']}, sending response on channel index {channel}")
             return  # we're done 
            
         # last guard rail before we being trace routing

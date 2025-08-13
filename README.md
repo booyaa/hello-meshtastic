@@ -65,17 +65,75 @@ cargo-binstall htmlq
 cat londonliverpoolstreet | htmlq 'div' --remove-nodes br
 ```
 
-### mqtt
+### MQTT
 
 reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
 
 - code: [mqtt-client.py](https://github.com/pdxlocations/Meshtastic-Python-Examples/blob/main/MQTT/mqtt-client.py) - not working
-- topic: `msh/EU_868/UK/England/Norfolk`
+
+#### Works on my T1000-e
+
+- lora
+  - ignore MQTT: off
+  - OK to MQTT: on
+- MQTT
+  - enabled: on
+  - MQTT Client proxy: on
+  - Connect to MQTT via Proxy: on
+  - Encryption Enabled: on
+  - Map report enabled: off
+  - Root topic: `msh/EU_868/England/Norfolk` # check side by side, it has to be identical on all MQTT clients!
 - channel
+  - name: # must be the same on all MQTT client!
   - default: key `AQ==`
   - uplink: on
-  - downlink: off
-  - location: don't share
+  - downlink: on # otherwise we don't get messages
+  - allow position requests: off
+
+### Worked once on Heltec V3
+
+- lora
+  - ignore MQTT: off # turning on, stops messages from arriving
+  - OK to MQTT: on
+- MQTT
+  - enabled: on
+  - MQTT Client proxy: on
+  - Connect to MQTT via Proxy: on
+  - Encryption enabled: on
+  - JSON enabled: on
+  - Map report enabled: off
+  - Root topic: `msh/EU_868/England/Norfolk` # check side by side, it has to be identical on all MQTT clients!
+- channel
+  - name: # must be the same on all MQTT client!
+  - default: key `AQ==`
+  - uplink: on
+  - downlink: on # otherwise we don't get messages
+  - allow position requests: off
+
+### Using noproto to debug MQTT
+
+```sh
+meshtastic -s --no-proto
+```
+
+### MQTT JSON sub
+
+```sh
+mosquitto_sub \
+  -h mqtt.meshtastic.org -u meshdev -P large4cats \
+  -t 'msh/EU_868/England/Norfolk/2/json/CHANNEL_NAME/#' --id 'gandalf-boo'
+```
+
+```json
+{
+  "channel":2,
+  "from":1111,
+  "hop_start":3,
+  "hops_away":0,
+  "id":3907767157,
+  "payload":{"text":"Boom bip "},
+  "rssi":-16,"sender":"!deadface","snr":6,"timestamp":0,"to":4294967295,"type":"text"}
+```
 
 ## Further Reading
 

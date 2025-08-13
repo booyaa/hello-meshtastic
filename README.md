@@ -116,12 +116,17 @@ reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
 meshtastic -s --no-proto
 ```
 
-### MQTT JSON sub
+### Using mosquitto tools
 
 ```sh
+# JSON end point
 mosquitto_sub \
   -h mqtt.meshtastic.org -u meshdev -P large4cats \
   -t 'msh/EU_868/England/Norfolk/2/json/CHANNEL_NAME/#' --id 'gandalf-boo'
+
+# THis doesn't work
+mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/England/Norfolk/2/json/YOUR_CHANNEL' --id 'gandalf-boo' -m '{"channel":x,"from":xxx,"hop_start":x,"hops_away":x,"id":xxx,"payload":{"text":"you know it!"},"sender":"!deadface","timestamp":0,"to":xxx,"type":"text"}'
+
 ```
 
 ```json

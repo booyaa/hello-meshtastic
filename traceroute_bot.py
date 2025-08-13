@@ -67,8 +67,17 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         from_node = packet.get('from', 'Unknown')
         to = packet.get('to', 'Unknown') if packet.get('to') != meshtastic.BROADCAST_NUM else 'broadcast'
         from_node_details = get_node_info(from_node)
+
+        # andor injoke for status check
+        if message.decode().lower().startswith ('on program'):
+            channel = packet.get('channel',0)
+            interface.sendText("(puts hands on head)", channelIndex=channel)
+            return  # we're done 
+           
+        # last guard rail before we being trace routing
+        # FIXME: this could be better branched
         if not message.decode().lower().startswith('traceroute'):
-           return  # Ignore non-traceroute messages
+            return  # Ignore non-traceroute messages
         
         message = message.decode().lower().replace("traceroute", "").strip()
         parts = message.split(",")

@@ -45,12 +45,14 @@ def on_connection(interface, topic=pub.AUTO_TOPIC):
         node_info = interface.getMyNodeInfo()
         our_coords = (node_info.get('position', {}).get('latitude', {}), node_info.get('position', {}).get('longitude', {}))
         logging.warning(f"No coordinates set using TRACEBOT_COORDS, using default from device: {our_coords}")
+    # TODO: refactor and store globally
     channels = node.channels
     channel_log = ""
     if channels:
         channel_log = "Listening on channels:"
         for channel in channels:
             if channel.role:
+
                 channel_log += f" {"default" if len(channel.settings.name) == 0 else channel.settings.name} (ch: {channel.index}) - {"primary" if channel.role == 1 else "secondary"} /"
         channel_log = channel_log[:-2] # trim trailing separator
     else:
@@ -73,13 +75,13 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
             channel = packet.get('channel',0)
             interface.sendText("(puts hands on head)", channelIndex=channel)
             logging.info(f"Received status check from {from_node_details['string']}, sending response on channel index {channel}")
-            return  # we're done 
-           
+            return  # we're done
+
         # last guard rail before we being trace routing
         # FIXME: this could be better branched
         if not message.decode().lower().startswith('traceroute'):
             return  # Ignore non-traceroute messages
-        
+
         message = message.decode().lower().replace("traceroute", "").strip()
         parts = message.split(",")
         if len(parts) == 3:
@@ -89,8 +91,7 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
         else:
             latitude = longitude = None
             label = message + " - " if len(message) > 0 else ""
-            print("DEBUG", label)
-        
+
         # add cool off period
         current_time = time.localtime()
         elapsed_seconds = (current_time.tm_min * 60 + current_time.tm_sec) - (last_run.tm_min * 60 + last_run.tm_sec)
@@ -100,13 +101,12 @@ def on_receive(packet, topic=pub.AUTO_TOPIC):
             traceroute = "skipped"
         else:
             traceroute = lazy_traceroute(from_node)
-        
+
         global our_coords
         destination_coords = from_node_details['coords'] if latitude is None or longitude is None else (latitude, longitude)
         if latitude is None or longitude is None:
             logging.warning(f"Using device coordinates: {destination_coords} for distance measuring. This maybe inaccurate unless channel is using precision.")
 
-        print(f"DEBUG|Coords: {destination_coords}, Label: {label}, Elapsed seconds: {elapsed_seconds}")
         distance_to_destination = distance(our_coords, destination_coords)
         logging.info(f"{label}{traceroute} - distance to destination: {distance_to_destination:.2f} km")
     else:
@@ -123,7 +123,6 @@ def get_node_info(node_num):
     """Retrieve node information by node number."""
     node_info = interface.nodesByNum.get(node_num, {})
     user_info = node_info.get('user', {})
-    print(f"DEBUG|coords {node_info.get('position', {})}")
     coords = (node_info.get('position', {}).get('latitude', {}), node_info.get('position', {}).get('longitude', {}))
     return {
         'longName': user_info.get('longName', 'Unknown'),

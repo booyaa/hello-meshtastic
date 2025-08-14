@@ -24,6 +24,20 @@
 
 ### Side Quests
 
+#### Bluetooth
+
+```sh
+systemctl status bluetooth
+bluetoothctl
+list # show our controllers
+scan on # show pairable devices
+scan le # low energy devices?
+devices # show paired devices
+
+uvx meshtastic --ble-scan # get list of devices to pair with
+uvx meshtastic --ble _DEVICE_
+```
+
 #### ClockBot feature testing in REPL
 
 ```sh

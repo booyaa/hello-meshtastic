@@ -10,6 +10,7 @@
 - [Trace Route Bot](./traceroute_bot.py) - sends trace routes if DM
   - un*x `TRACEBOT_COORDS="lat,lon"          PYTHONIOENCODING="utf-8" P     YTHONUTF8=1   python traceroute_bot.py`
   - ps1 `$env:TRACEBOT_COORDS="lat,lon";$env:PYTHONIOENCODING="utf-8"; $env:PYTHONUTF8=1; python .\traceroute_bot.py`
+- [Packet analyser](./packet_analyzer.py) - prints out the contents of packets. Packets are catalogue in [this](./packets.md) document.
 
 > [!TIP]
 > To set environment variable in PowerShell use `$env:TCP_HOSTNAME="1.2.3.4"`. For linux-ish use `export TCP_HOSTNAME="1.2.3.4"`.

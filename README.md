@@ -24,6 +24,16 @@
 
 ### Side Quests
 
+#### CLI overrides (for overriding changes)
+
+```sh
+# turn off wifi
+uvx meshtastic --host 1.2.3.4 --set network.wifi_enabled false
+
+# setting modem preset (btw SHORT_TURBO won't work in EU_868), best we can use is SHORT_FAST
+uvx meshtastic --serial --set lora.modem_preset	SHORT_TURBO
+```
+
 #### Bluetooth
 
 ```sh
@@ -105,7 +115,7 @@ reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
   - downlink: on # otherwise we don't get messages
   - allow position requests: off
 
-### Worked once on Heltec V3
+#### Worked once on Heltec V3
 
 - lora
   - ignore MQTT: off # turning on, stops messages from arriving
@@ -125,13 +135,13 @@ reference: [chi-mesh](https://chicagolandmesh.org/guides/mqtt/)
   - downlink: on # otherwise we don't get messages
   - allow position requests: off
 
-### Using noproto to debug MQTT
+#### Using noproto to debug MQTT
 
 ```sh
 meshtastic -s --no-proto
 ```
 
-### Using mosquitto tools
+#### Using mosquitto tools
 
 ```sh
 # JSON end point

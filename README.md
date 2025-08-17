@@ -21,6 +21,7 @@
 > These scripts maybe non-functional
 
 - [Waiting for ACK](./wip_waiting_for_ack.py) - getting an ack from messages using the sendtext method
+- [Rover](./wip_rover.py) - control a robotic rover via meshtastic
 
 ### Side Quests
 

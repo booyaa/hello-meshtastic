@@ -31,8 +31,10 @@
 # turn off wifi
 uvx meshtastic --host 1.2.3.4 --set network.wifi_enabled false
 
-# setting modem preset (btw SHORT_TURBO won't work in EU_868), best we can use is SHORT_FAST
-uvx meshtastic --serial --set lora.modem_preset	SHORT_TURBO
+# setting modem preset
+uvx meshtastic --serial --set lora.modem_preset SHORT_TURBO # this won't work in EU_868
+uvx meshtastic --serial --set lora.modem_preset SHORT_FAST # use this instead
+
 ```
 
 #### Bluetooth

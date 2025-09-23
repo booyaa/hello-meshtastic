@@ -191,7 +191,18 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
 - Drop UF2 into T1000-E drive, you'll get a pop up saying drive was disconnected (that's okay)
  
  If stuck in DFU mode, try holding down the button until power down. You might need to try to do the quick toggle with the magnetic power connects.
- 
+
+## Seeed XIAO ESP S3 and Wio SX-1262
+
+- Remove radio (it's easier to reach the button)
+- Press (B)oot button (left side button f USB is pointing to you) and plug in data cable
+- Light will go red
+- Go to https://flasher.meshtastic.org/
+- Select Seeed Xiao ESP32-S3 from the Seeed (or use autodetect)
+- Select latest alpha
+- Pop up - Pair with USB JTAG/serial debug unit COM10
+
+
 ## Further Reading
 
 ### Official Docs

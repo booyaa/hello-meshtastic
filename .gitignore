@@ -2,6 +2,7 @@
 *.log*
 # don't commit me bro - scratch / test scripts
 dcmb_*
+*.ini
 
 # Python-generated files
 __pycache__/

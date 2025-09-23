@@ -11,6 +11,7 @@
   - un*x `TRACEBOT_COORDS="lat,lon"          PYTHONIOENCODING="utf-8" P     YTHONUTF8=1   python traceroute_bot.py`
   - ps1 `$env:TRACEBOT_COORDS="lat,lon";$env:PYTHONIOENCODING="utf-8"; $env:PYTHONUTF8=1; python .\traceroute_bot.py`
 - [Packet analyser](./packet_analyzer.py) - prints out the contents of packets. Packets are catalogue in [this](./packets.md) document.
+- [Bridge](./bridge.py) - repeats messages between a LongFast and ShortFast meshes
 
 > [!TIP]
 > To set environment variable in PowerShell use `$env:TCP_HOSTNAME="1.2.3.4"`. For linux-ish use `export TCP_HOSTNAME="1.2.3.4"`.
@@ -168,6 +169,29 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
   "rssi":-16,"sender":"!deadface","snr":6,"timestamp":0,"to":4294967295,"type":"text"}
 ```
 
+## Flashing hardware
+
+### Heltec v3
+
+- Plug in Data USB cable
+- Restart radio
+- Go to https://flasher.meshtastic.org/
+- Select Heltec v3 from the Heltec
+- Select latest alpha
+- Update (device notification will pop up - you'll be asked to connect to serial device. Select USB CHS) 
+
+## T1000-e
+
+- Plug in Data cable 
+- Go to https://flasher.meshtastic.org/
+- Select T1000-e from the Seeed
+- Select latest alpha
+- Go into DFU mode (solid green) - drive will open up called T1000-E (usually D or E)
+- Download firmware
+- Drop UF2 into T1000-E drive, you'll get a pop up saying drive was disconnected (that's okay)
+ 
+ If stuck in DFU mode, try holding down the button until power down. You might need to try to do the quick toggle with the magnetic power connects.
+ 
 ## Further Reading
 
 ### Official Docs

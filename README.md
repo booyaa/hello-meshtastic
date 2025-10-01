@@ -36,6 +36,12 @@ uvx meshtastic --host 1.2.3.4 --set network.wifi_enabled false
 uvx meshtastic --serial --set lora.modem_preset SHORT_TURBO # this won't work in EU_868
 uvx meshtastic --serial --set lora.modem_preset SHORT_FAST # use this instead
 
+# modem preset defaults
+uvx meshtastic --serial --set lora.modem_preset LONG_FAST
+uvx meshtastic --serial --set lora.bandwidth 0
+uvx meshtastic --serial --set lora.spread_factor 0
+uvx meshtastic --serial --set lora.coding_rate 0
+uvx meshtastic --serial --set lora.frequency_offset 0.0
 ```
 
 #### Bluetooth
@@ -178,18 +184,18 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
 - Go to https://flasher.meshtastic.org/
 - Select Heltec v3 from the Heltec
 - Select latest alpha
-- Update (device notification will pop up - you'll be asked to connect to serial device. Select USB CHS) 
+- Update (device notification will pop up - you'll be asked to connect to serial device. Select USB CHS)
 
 ## T1000-e
 
-- Plug in Data cable 
+- Plug in Data cable
 - Go to https://flasher.meshtastic.org/
 - Select T1000-e from the Seeed
 - Select latest alpha
 - Go into DFU mode (solid green) - drive will open up called T1000-E (usually D or E)
 - Download firmware
 - Drop UF2 into T1000-E drive, you'll get a pop up saying drive was disconnected (that's okay)
- 
+
  If stuck in DFU mode, try holding down the button until power down. You might need to try to do the quick toggle with the magnetic power connects.
 
 ## Seeed XIAO ESP S3 and Wio SX-1262

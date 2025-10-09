@@ -28,3 +28,10 @@
 ## BBS software
 
 A [fork](https://github.com/booyaa/Hops) of [Hops](https://github.com/morria/Hops).
+
+## UPS-C Hat
+
+## e-Paper Display Hat
+
+Will add the code here when it's ready. In the meanwhile please see these
+[instructions](https://github.com/booyaa/hello-waveshare-epaper-display/blob/main/README.md#verifying-device-works) for verifying your hat works.

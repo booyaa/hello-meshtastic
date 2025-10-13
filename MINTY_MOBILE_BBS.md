@@ -10,7 +10,7 @@
 ## Pi config
 
 - Bookworm 64-bit
-- One CPU core active
+- ~~One CPU core active~~ reverted because a lot of stuff needs multi cores (see warning)
 
 ```diff
 #/boot/firmware/cmdline.txt
@@ -42,3 +42,54 @@ A [fork](https://github.com/booyaa/Hops) of [Hops](https://github.com/morria/Hop
 
 Will add the code here when it's ready. In the meanwhile please see these
 [instructions](https://github.com/booyaa/hello-waveshare-epaper-display/blob/main/README.md#verifying-device-works) for verifying your hat works.
+
+## Wio SX-1262
+
+Using the [radio](https://wiki.seeedstudio.com/wio_sx1262/) that comes with the
+Seeed XIAO starter kit and the [lora-MeshAdv-Mini-900M22S.yaml](https://github.com/meshtastic/firmware/blob/develop/bin/config.d/lora-MeshAdv-Mini-900M22S.yaml) config.
+
+### Config and pin mapping
+
+| radio          | pi gpio |
+| :------------- | :---------------- |
+| CS (NSS)     6 | 8                 |
+| IRQ (DIO1)  12 | 16                |
+| Busy        11 | 20                |
+| Reset        5 | 24                |
+| RXen (MOSI)  3 | 12                |
+
+---------------------------------------
+| Power.       8 | 1 (3.3v) 2 (5v).  |
+| Ground       7 | 6                 |
+
+DIO2_AS_RF_SWITCH: true
+DIO3_TCXO_VOLTAGE: true
+
+###  WIO SX-1262 Pinout
+
+| left      | right     |
+| :-------- | :-------- |
+| 1 - DIO1  | 2 - Vin   |
+| 3 - BUSY  | 4 - Gnd   |
+| 5 - RST   | 6 - 3v3   |
+| 7 - NSS   | 8 - MOSI  |
+| 9 - RF-SW | 10 - MISO |
+| 11 - D5   | 12 - SCK  |
+| 13 - D6   | 14 - D7   |
+
+### Raspberry Pi Pinout
+
+| left          | right                   |
+| :------------ | :---------------------- |
+| 1 - 3v3 Power | 2 - 5v power            |
+| 3 - N/A       | 4 - 5v power            |
+| 5 - N/A       | 6 - Groumd              |
+| 7 - N/A       | 8 - GPIO 14 (UART TX)   |
+| 9 - N/A       | 10 - N/A                |
+| 11 - N/A      | 12 - GPIO 18 (SPI1 CE0) |
+| 13 - N/A      | 14 - N/A                |
+| 15 - N/A      | 16 - GPIO23             |
+| 17 - N/A      | 18 - N/A                |
+| 19 - N/A      | 20 - Ground             |
+| 21 - N/A      | 22 - N/A                |
+| 23 - N/A      | 24 - GPIO 8 (SPIO CE0)  |

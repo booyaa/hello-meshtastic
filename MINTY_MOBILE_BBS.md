@@ -50,17 +50,17 @@ Seeed XIAO starter kit and the [lora-MeshAdv-Mini-900M22S.yaml](https://github.c
 
 ### Config and pin mapping
 
-| radio          | pi gpio |
-| :------------- | :---------------- |
-| CS (NSS)     6 | 8                 |
-| IRQ (DIO1)  12 | 16                |
-| Busy        11 | 20                |
-| Reset        5 | 24                |
-| RXen (MOSI)  3 | 12                |
+| radio          | pi gpio   |
+| :------------- | :-------- |
+| Power        4 |  1 (3.3v) | 
+| Ground       2 |  6        | 
+| CS (NSS)     7 |  8        | 
+| RXen (MOSI)  8 | 12        | 
+| IRQ (DIO1)   1 | 16        | 
+| Busy         3 | 20        |
+| Reset        5 | 24        |
 
----------------------------------------
-| Power.       8 | 1 (3.3v) 2 (5v).  |
-| Ground       7 | 6                 |
+-----------------------------
 
 DIO2_AS_RF_SWITCH: true
 DIO3_TCXO_VOLTAGE: true

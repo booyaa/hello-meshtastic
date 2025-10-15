@@ -186,7 +186,7 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
 - Select latest alpha
 - Update (device notification will pop up - you'll be asked to connect to serial device. Select USB CHS)
 
-## T1000-e
+### T1000-e
 
 - Plug in Data cable
 - Go to https://flasher.meshtastic.org/
@@ -198,7 +198,7 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
 
  If stuck in DFU mode, try holding down the button until power down. You might need to try to do the quick toggle with the magnetic power connects.
 
-## Seeed XIAO ESP S3 and Wio SX-1262
+### Seeed XIAO ESP S3 and Wio SX-1262
 
 - Remove radio (it's easier to reach the button)
 - Press (B)oot button (left side button f USB is pointing to you) and plug in data cable
@@ -207,6 +207,51 @@ mosquitto_pub -h mqtt.meshtastic.org -u meshdev -P large4cats -t 'msh/EU_868/Eng
 - Select Seeed Xiao ESP32-S3 from the Seeed (or use autodetect)
 - Select latest alpha
 - Pop up - Pair with USB JTAG/serial debug unit COM10
+
+## WSL miscellany
+
+Mostly cribbed from the [docs](https://meshtastic.org/docs/development/reference/md_wsl/).
+
+- install [usbipd-win](https://github.com/dorssel/usbipd-win) `winget install usbipd`
+- run powershell as admin
+
+> [!TIP]
+> CTRL whilst clicking on "+" to add new Powershell (default terminal) launch as admin
+
+```ps1
+[ADMIN]:PS > usbipd list
+Connected:
+BUSID  VID:PID    DEVICE                                                        STATE
+1-5    xxxx:yyyy  Integrated Webcam                                             Not shared
+1-7    xxxx:yyyy  Intel(R) Wireless Bluetooth(R)                                Not shared
+1-9    239a:8029  USB Serial Device (COM6)                                      Shared
+^-- probably this device
+
+Persisted:
+GUID                                  DEVICE
+cacc70df-a44d-43dd-8da7-989145bddbd8  Silicon Labs CP210x USB to UART Bridge (COM3)
+
+[ADMIN]:PS > usbipd bind --busid=1-9
+
+[ADMIN]:PS C:\Users\marks> usbipd attach --wsl  --busid=1-9
+usbipd: info: Using WSL distribution 'Ubuntu-22.04' to attach; the device will be available in all WSL 2 distributions.
+usbipd: info: Loading vhci_hcd module.
+usbipd: info: Detected networking mode 'nat'.
+usbipd: info: Using IP address 1.2.3.4 to reach the host.
+```
+
+- open WSL
+
+```sh
+$ lsusb
+Bus 002 Device 001: ID xxxx:yyyy Linux Foundation 3.0 root hub
+Bus 001 Device 002: ID xxxx:yyyy Adafruit T1000-E-BOOT <--- probably this one
+Bus 001 Device 001: ID xxxx:yyyy Linux Foundation 2.0 root hub
+
+$ $uvx meshtastic -s --info # should detect a valid serial
+Connected to radio
+
+
 
 
 ## Further Reading

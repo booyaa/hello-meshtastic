@@ -1,0 +1,5 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "meshtastic-client", "~> 0.1.0", github: "blaknite/meshtastic-client"

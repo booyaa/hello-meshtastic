@@ -93,7 +93,6 @@ What about these?
 | Ground       2 | 6   |                            |
 | Power        4 | ?   | was 1 (Pi) 3.3v            |
 
-
 ###  WIO SX-1262 Pinout
 
 > [!IMPORTANT]

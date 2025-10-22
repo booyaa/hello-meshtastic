@@ -12,6 +12,7 @@ logging_level = os.environ.get("LOGGING_LEVEL", "INFO").upper()
 logging.basicConfig(level=logging_level)
 
 logging.info(f"Battery check interval set to {sleep_in_seconds} seconds.")
+logging.info(f"Logging level set to {logging_level}.")
 # loop the rest of this code to run every 60 seconds
 while True:
     battery_info = subprocess.check_output(["./battery_meter"]).decode("utf-8").strip()

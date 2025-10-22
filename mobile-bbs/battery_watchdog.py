@@ -5,9 +5,11 @@ import os
 import subprocess
 import time
 
-logging.basicConfig(level=logging.INFO)
 
 sleep_in_seconds = os.environ.get("BATTERY_CHECK_INTERVAL", 60)
+logging_level = os.environ.get("LOGGING_LEVEL", "INFO").upper()
+
+logging.basicConfig(level=logging_level)
 
 logging.info(f"Battery check interval set to {sleep_in_seconds} seconds.")
 # loop the rest of this code to run every 60 seconds

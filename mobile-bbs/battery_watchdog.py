@@ -16,7 +16,7 @@ logging.info(f"Logging level set to {logging_level}.")
 # loop the rest of this code to run every 60 seconds
 while True:
     battery_info = subprocess.check_output(["./battery_meter"]).decode("utf-8").strip()
-    logging.debug(f"Battery info: {battery_info}")
+    logging.debug(f"Battery capacity: {battery_info}%")
 
     if int(battery_info) <= 5:
         logging.warning("Battery level is below 5%! Shutting down!")

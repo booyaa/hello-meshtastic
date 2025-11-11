@@ -1,6 +1,6 @@
-# Convert Deck
+# Covert Deck
 
-A writer deck with LoRa capabilities.
+A writer deck with covert LoRa capabilities.
 
 ## Rationale
 

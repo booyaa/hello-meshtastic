@@ -33,7 +33,8 @@ like the gherkin 30%) [pinout](https://github.com/AbeNaws/cardkb-updated?tab=rea
 
 ### Software
 
-- TBC
+- eSpeak NG `sudo apt install espeakng`
+  - Python module `pip install espeakng`
 
 ## Set up notes
 

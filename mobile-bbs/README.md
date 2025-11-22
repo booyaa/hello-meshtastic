@@ -43,7 +43,29 @@ A [fork][gh_hops_fork] of [Hops][gh_hops].
 Will add the code here when it's ready. In the meanwhile please see these
 [instructions][ws_epd] for verifying your hat works.
 
-## Wio SX-1262
+## Troubleshooting
+
+### UART USB cable
+
+- [pinout diagram](https://pinout.xyz/pinout/uart)
+- [jeff's post](https://www.jeffgeerling.com/blog/2021/attaching-raspberry-pis-serial-console-uart-debugging)
+
+| pin | function    | colour |
+| :-- | :---------- | :----- |
+| 7   | Ground      | Black  |
+| 8   | GPIO 14 TX  | White  |
+| 9   | GPIO 15 RX  | Green  |
+
+> [!WARNING]
+> Don't connect Red (+5 V unless you want to power the pi too)
+
+### SPI
+
+TL;DR if you don't have /dev/spidev0.0 and /dev/spidev1.0 something broke your spis (meshtasticd was my culprit). It's probably easier to zap OS and start again.
+
+Useful tool: [spidev-test](https://github.com/rm-hull/spidev-test)
+
+## Wio SX-1262 - Not Working
 
 Using the [radio][ws_sx1262_starter_kit]
 that comes with the Seeed XIAO starter kit and the config.

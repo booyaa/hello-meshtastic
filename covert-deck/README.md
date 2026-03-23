@@ -33,8 +33,23 @@ like the gherkin 30%) [pinout](https://github.com/AbeNaws/cardkb-updated?tab=rea
 
 ### Software
 
-- eSpeak NG `sudo apt install espeakng`
-  - Python module `pip install espeakng`
+```sh
+# eSpeak NG
+sudo apt install espeakng
+
+# python module
+uv pip install espeakng
+
+# preferred editor for official writerdecks
+sudo apt install wordgrinder
+
+# terminal 1 - create a test export to trigger tts
+cd src
+wordgrinder somefile.wg # export as text (foo.txt0
+
+# terminal 2 - should start speaking when the file is exported
+./src/watch-and-speak.sh
+```
 
 ## Set up notes
 

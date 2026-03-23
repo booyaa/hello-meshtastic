@@ -1,0 +1,1 @@
+this is a test. this is a very simple editor. can i type without needing to read the screen. also why are there so much mark up? oh well i guess it's a user readable file format. not a big fan for real. another test. woot.

@@ -43,7 +43,10 @@ def weather_forecast():
     try:
         response = requests.get("https://wttr.in?format=4", headers={"User-Agent": user_agent}) # will use our external IP to geolocate
         if response.status_code == 200:
+            response.encoding = 'utf-8'
             forecast = response.text
+            # try this, if encoding goes skewiff: forecast = bytes.decode(response.content, 'utf8')
+
     except requests.RequestException as e:
         print(f"Error fetching weather info: {e}")
     return forecast

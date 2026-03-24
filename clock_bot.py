@@ -4,13 +4,13 @@ from mudp import send_nodeinfo, send_text_message, conn, node
 import requests
 
 # FIXME: create a config
-weather_chimes = [9, 12, 18] # what hours should we announce weather?
-dad_joke_chimes = [7, 8, 10, 11, 13, 14, 15, 16, 17] # what hours should we announce dad jokes?
+weather_chimes = [9, 12, 15, 16, 18] # what hours should we announce weather?
+dad_joke_chimes = [7, 8, 10, 11, 13, 14, 17] # what hours should we announce dad jokes?
 user_agent = "Clock Bot v0.0.0 (https://github.com/booyaa/hello-meshtastic)"
 
 def setup():
     node.channel = "LongFast"
-    node.key = "1PG7OiApB1nwvP+rz05pAQ=="
+    node.key = "AQ="
     node.node_id = "!be11ab07"
     node.long_name = "Mx Clock Bot"
     node.short_name = "⏰"
